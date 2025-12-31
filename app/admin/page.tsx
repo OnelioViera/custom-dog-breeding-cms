@@ -2,6 +2,9 @@ import { auth } from "@/lib/auth/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+// Force dynamic rendering since we use auth()
+export const dynamic = 'force-dynamic';
+
 export default async function AdminDashboard() {
   try {
     const session = await auth();

@@ -6,6 +6,9 @@ import { PageList } from "@/components/admin/page-list";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+// Force dynamic rendering since we use auth() and database
+export const dynamic = 'force-dynamic';
+
 export default async function PagesPage() {
   await connectDB();
   const session = await auth();

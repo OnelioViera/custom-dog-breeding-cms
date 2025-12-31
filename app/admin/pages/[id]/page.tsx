@@ -4,6 +4,9 @@ import Page from "@/lib/db/models/Page";
 import { PageEditor } from "@/components/editor/page-editor";
 import { notFound } from "next/navigation";
 
+// Force dynamic rendering since we use auth() and database
+export const dynamic = 'force-dynamic';
+
 export default async function EditPagePage({
   params,
 }: {

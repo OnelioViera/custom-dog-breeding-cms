@@ -5,6 +5,9 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import type { ReactNode } from "react";
 
+// Force dynamic rendering since we use headers() and auth()
+export const dynamic = 'force-dynamic';
+
 export default async function AdminLayout({
   children,
 }: {
