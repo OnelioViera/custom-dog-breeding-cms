@@ -127,7 +127,7 @@ export function ButtonPresetList({ presets }: ButtonPresetListProps) {
         <h3 className="font-semibold text-blue-900 mb-2">How to Use Button Presets</h3>
         <ol className="list-decimal list-inside space-y-1 text-sm text-blue-700">
           <li>Create a button preset with your desired colors, sizes, and border radius</li>
-          <li>Click <strong>&quot;Apply Preset&quot;</strong> on any preset card to make it active</li>
+          <li>Click <strong>{`"Apply Preset"`}</strong> on any preset card to make it active</li>
           <li>The active preset will automatically style <strong>all buttons</strong> across your website</li>
           <li>Buttons in the page editor, live preview, and published pages will all use the active preset</li>
         </ol>

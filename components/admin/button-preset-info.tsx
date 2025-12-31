@@ -45,7 +45,7 @@ export function ButtonPresetInfo({ activePreset }: ButtonPresetInfoProps) {
             This includes buttons in the page editor, live preview, and published pages.
           </p>
           <p className="text-xs text-green-600 mt-2">
-            To change the active preset, go to <a href="/admin/button-presets" className="underline">Button Presets</a> and click &quot;Apply Preset&quot; on a different preset.
+            To change the active preset, go to <a href="/admin/button-presets" className="underline">Button Presets</a> and click {`"Apply Preset"`} on a different preset.
           </p>
         </div>
       </div>
