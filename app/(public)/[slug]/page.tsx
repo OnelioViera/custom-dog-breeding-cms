@@ -66,12 +66,12 @@ export default async function PublicPage({
       notFound();
     }
 
-    // Ensure page has required structure
-    const pageData = {
-      title: page.title || "Untitled Page",
-      blocks: page.blocks || [],
-      ...page,
-    };
+      // Ensure page has required structure
+      const pageData = {
+        ...page,
+        title: page.title || "Untitled Page",
+        blocks: page.blocks || [],
+      };
 
     return <PageRenderer page={JSON.parse(JSON.stringify(pageData))} />;
   } catch (error: any) {
