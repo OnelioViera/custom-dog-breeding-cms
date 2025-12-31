@@ -93,10 +93,15 @@ export function PageEditor({ page, isNew = false }: PageEditorProps) {
               variant="outline"
               onClick={() => handleSave("draft")}
               disabled={isSaving}
+              disablePreset={true}
             >
               {isSaving ? "Saving..." : "Save Draft"}
             </Button>
-            <Button onClick={() => handleSave("published")} disabled={isSaving}>
+            <Button 
+              onClick={() => handleSave("published")} 
+              disabled={isSaving}
+              disablePreset={true}
+            >
               {isSaving ? "Publishing..." : "Publish"}
             </Button>
           </div>

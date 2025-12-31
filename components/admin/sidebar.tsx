@@ -13,6 +13,7 @@ import {
   HardDrive,
   Settings,
   LayoutDashboard,
+  MousePointerClick,
 } from "lucide-react";
 
 const navItems = [
@@ -20,6 +21,7 @@ const navItems = [
   { icon: FileText, label: "Pages", href: "/admin/pages" },
   { icon: Blocks, label: "Blocks", href: "/admin/blocks" },
   { icon: Palette, label: "Themes", href: "/admin/themes" },
+  { icon: MousePointerClick, label: "Button Presets", href: "/admin/button-presets" },
   { icon: Search, label: "SEO", href: "/admin/seo" },
   { icon: Mail, label: "Email", href: "/admin/email" },
   { icon: Users, label: "Users", href: "/admin/users" },
@@ -34,7 +36,7 @@ export function Sidebar() {
     <aside className="w-64 bg-white border-r min-h-screen p-6">
       <div className="mb-8">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold">
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold" style={{ backgroundColor: 'hsl(250 84% 71%)' }}>
             OJV
           </div>
           <div>
@@ -45,21 +47,30 @@ export function Sidebar() {
       </div>
 
       <nav className="space-y-2">
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors",
-              pathname === item.href || (item.href === "/admin" && pathname === "/admin")
-                ? "bg-primary text-white"
-                : "text-gray-600 hover:bg-gray-100"
-            )}
-          >
-            <item.icon className="w-5 h-5" />
-            <span>{item.label}</span>
-          </Link>
-        ))}
+        {navItems.map((item) => {
+          // Check if the current pathname matches the item's href
+          // For exact matches or when pathname starts with the href (for nested routes)
+          const isActive = pathname === item.href || 
+            (item.href !== "/admin" && pathname.startsWith(item.href + "/")) ||
+            (item.href === "/admin" && pathname === "/admin");
+          
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors",
+                isActive
+                  ? "text-white"
+                  : "text-gray-600 hover:bg-gray-100"
+              )}
+              style={isActive ? { backgroundColor: 'hsl(250 84% 71%)' } : undefined}
+            >
+              <item.icon className="w-5 h-5" />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
       </nav>
     </aside>
   );

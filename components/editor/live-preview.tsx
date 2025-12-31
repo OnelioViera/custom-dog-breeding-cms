@@ -6,6 +6,8 @@ import { NavbarPreview } from "./navbar-preview";
 import { HeroBlock } from "@/components/blocks/hero-block";
 import { TextBlock } from "@/components/blocks/text-block";
 import { PuppyCardsBlock } from "@/components/blocks/puppy-cards-block";
+import { ButtonPresetInjectorClient } from "./button-preset-injector-client";
+import { ThemeInjectorClient } from "./theme-injector-client";
 
 const blockComponents: Record<string, any> = {
   hero: HeroBlock,
@@ -29,11 +31,14 @@ export function LivePreview({ pageData }: { pageData: any }) {
   }, []);
 
   return (
-    <Card className="p-0 h-[calc(100vh-200px)] overflow-y-auto bg-white">
-      <div className="mb-4 text-sm text-muted-foreground border-b pb-2 px-6 pt-4">
-        Live Preview
-      </div>
-      <div className="space-y-0">
+    <>
+      <ThemeInjectorClient />
+      <ButtonPresetInjectorClient />
+      <Card className="p-0 h-[calc(100vh-200px)] overflow-y-auto bg-white">
+        <div className="mb-4 text-sm text-muted-foreground border-b pb-2 px-6 pt-4">
+          Live Preview
+        </div>
+        <div className="space-y-0">
         {/* Navbar Preview */}
         {navbarData && navbarData.settings.showNavbar && (
           <div className="border-b">
@@ -73,6 +78,7 @@ export function LivePreview({ pageData }: { pageData: any }) {
         </div>
       </div>
     </Card>
+    </>
   );
 }
 

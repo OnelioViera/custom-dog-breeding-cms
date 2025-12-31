@@ -36,3 +36,81 @@
   }
 }
 
+/* Admin button styles - ONLY apply to buttons with data-admin-button="true" */
+/* These styles should NEVER affect public website buttons */
+[data-admin-button="true"] {
+  /* Reset any preset styles */
+  border-radius: 0.375rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  transition: all 0.2s !important;
+  height: auto !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  /* Force admin button colors - override any preset styles */
+  background-color: transparent !important;
+  border: 1px solid #4b5563 !important;
+  color: #4b5563 !important;
+}
+
+/* Ensure public buttons (without data-admin-button) use preset styles */
+/* Override Tailwind color classes when preset CSS variables are set */
+button:not([data-admin-button="true"])[data-button-variant="default"],
+a:not([data-admin-button="true"]) button[data-button-variant="default"] {
+  /* Use button preset colors if CSS variables are set */
+  background-color: var(--button-primary, hsl(var(--primary))) !important;
+  color: var(--button-text, hsl(var(--primary-foreground))) !important;
+}
+
+button:not([data-admin-button="true"])[data-button-variant="secondary"],
+a:not([data-admin-button="true"]) button[data-button-variant="secondary"] {
+  /* Use button preset colors if CSS variables are set */
+  background-color: var(--button-secondary, hsl(var(--secondary))) !important;
+  color: var(--button-text, hsl(var(--secondary-foreground))) !important;
+}
+
+[data-admin-button="true"][data-button-variant="default"],
+button[data-admin-button="true"]:not([data-button-variant]) {
+  background-color: transparent !important;
+  color: #4b5563 !important; /* dark gray */
+  border: 1px solid #4b5563 !important; /* dark gray */
+}
+
+[data-admin-button="true"][data-button-variant="default"]:hover,
+button[data-admin-button="true"]:not([data-button-variant]):hover {
+  background-color: #4b5563 / 0.1 !important;
+  color: #374151 !important; /* darker gray on hover */
+  border-color: #374151 !important;
+}
+
+[data-admin-button="true"][data-button-variant="secondary"] {
+  background-color: transparent !important;
+  color: #4b5563 !important; /* dark gray */
+  border: 1px solid #4b5563 !important; /* dark gray */
+}
+
+[data-admin-button="true"][data-button-variant="secondary"]:hover {
+  background-color: #4b5563 / 0.1 !important;
+  color: #374151 !important; /* darker gray on hover */
+  border-color: #374151 !important;
+}
+
+/* Override any preset CSS variables for admin buttons */
+[data-admin-button="true"] {
+  --button-primary: unset !important;
+  --button-secondary: unset !important;
+  --button-text: unset !important;
+  --button-border-radius: unset !important;
+  --button-sm-height: unset !important;
+  --button-sm-padding-x: unset !important;
+  --button-sm-font-size: unset !important;
+  --button-default-height: unset !important;
+  --button-default-padding-x: unset !important;
+  --button-default-font-size: unset !important;
+  --button-lg-height: unset !important;
+  --button-lg-padding-x: unset !important;
+  --button-lg-font-size: unset !important;
+}
+

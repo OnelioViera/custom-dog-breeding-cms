@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ButtonWithPreset } from "./button-with-preset";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +14,7 @@ interface HeroBlockProps {
     ctaLink?: string;
     showCTA?: boolean;
     layout?: "centered" | "left" | "pattern" | "minimal";
+    buttonPreset?: string | null;
   };
 }
 
@@ -98,13 +100,24 @@ export function HeroBlock({ content }: HeroBlockProps) {
         )}
         {content.showCTA !== false && content.ctaText && (
           <Link href={content.ctaLink || "#"}>
-            <Button 
-              size="lg" 
-              variant={layout === "minimal" ? "default" : "secondary"}
-              className={layout === "minimal" ? "bg-primary" : ""}
-            >
-              {content.ctaText}
-            </Button>
+            {content.buttonPreset ? (
+              <ButtonWithPreset
+                presetSlug={content.buttonPreset}
+                size="lg"
+                variant={layout === "minimal" ? "default" : "secondary"}
+                className={layout === "minimal" ? "bg-primary" : ""}
+              >
+                {content.ctaText}
+              </ButtonWithPreset>
+            ) : (
+              <Button 
+                size="lg" 
+                variant={layout === "minimal" ? "default" : "secondary"}
+                className={layout === "minimal" ? "bg-primary" : ""}
+              >
+                {content.ctaText}
+              </Button>
+            )}
           </Link>
         )}
       </div>

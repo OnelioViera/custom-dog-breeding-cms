@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavbarPreviewProps {
@@ -21,7 +20,6 @@ interface NavbarPreviewProps {
 }
 
 export function NavbarPreview({ pages, settings, currentSlug }: NavbarPreviewProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const style = settings.navbarStyle || "default";
   const position = settings.navbarPosition || "top";
   const logoText = settings.navbarLogoText || settings.siteName || "Site";
@@ -49,7 +47,7 @@ export function NavbarPreview({ pages, settings, currentSlug }: NavbarPreviewPro
   );
 
   return (
-    <nav className={baseClasses}>
+    <nav className={cn(baseClasses, "pointer-events-none")}>
       <div className={containerClasses}>
         <div className={cn(
           "flex items-center justify-between",
@@ -62,10 +60,10 @@ export function NavbarPreview({ pages, settings, currentSlug }: NavbarPreviewPro
               <img
                 src={settings.navbarLogo}
                 alt={logoText}
-                className="h-8 w-auto"
+                className="h-8 w-auto pointer-events-none"
               />
             ) : (
-              <span className="text-xl font-bold text-primary">{logoText}</span>
+              <span className="text-xl font-bold text-primary pointer-events-none">{logoText}</span>
             )}
           </div>
 
@@ -76,7 +74,7 @@ export function NavbarPreview({ pages, settings, currentSlug }: NavbarPreviewPro
             style === "minimal" && "gap-4"
           )}>
             <span className={cn(
-              "text-sm font-medium",
+              "text-sm font-medium pointer-events-none",
               (!currentSlug || currentSlug === "home") ? "text-primary" : "text-gray-700"
             )}>
               Home
@@ -85,7 +83,7 @@ export function NavbarPreview({ pages, settings, currentSlug }: NavbarPreviewPro
               <span
                 key={page.slug}
                 className={cn(
-                  "text-sm font-medium",
+                  "text-sm font-medium pointer-events-none",
                   currentSlug === page.slug ? "text-primary" : "text-gray-700"
                 )}
               >
@@ -94,44 +92,34 @@ export function NavbarPreview({ pages, settings, currentSlug }: NavbarPreviewPro
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-700 hover:text-primary transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          {/* Mobile Menu Button - Disabled in preview */}
+          <div className="md:hidden p-2 text-gray-700 pointer-events-none">
+            <Menu className="w-6 h-6" />
+          </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t mt-4 pt-4 pb-2">
-            <div className="flex flex-col gap-4">
-              <span className={cn(
-                "text-sm font-medium py-2",
-                (!currentSlug || currentSlug === "home") ? "text-primary" : "text-gray-700"
-              )}>
-                Home
+        {/* Mobile Navigation Menu - Always visible in preview, non-interactive */}
+        <div className="md:hidden border-t mt-4 pt-4 pb-2">
+          <div className="flex flex-col gap-4">
+            <span className={cn(
+              "text-sm font-medium py-2 pointer-events-none",
+              (!currentSlug || currentSlug === "home") ? "text-primary" : "text-gray-700"
+            )}>
+              Home
+            </span>
+            {sortedPages.map((page) => (
+              <span
+                key={page.slug}
+                className={cn(
+                  "text-sm font-medium py-2 pointer-events-none",
+                  currentSlug === page.slug ? "text-primary" : "text-gray-700"
+                )}
+              >
+                {page.title}
               </span>
-              {sortedPages.map((page) => (
-                <span
-                  key={page.slug}
-                  className={cn(
-                    "text-sm font-medium py-2",
-                    currentSlug === page.slug ? "text-primary" : "text-gray-700"
-                  )}
-                >
-                  {page.title}
-                </span>
-              ))}
-            </div>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

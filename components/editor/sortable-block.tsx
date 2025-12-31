@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RichTextEditor } from "./rich-text-editor";
 import { PageLinkSelector } from "./page-link-selector";
+import { ButtonPresetSelector } from "./button-preset-selector";
 import {
   Select,
   SelectContent,
@@ -36,7 +37,7 @@ export function SortableBlock({
   onChange,
   onDelete,
 }: SortableBlockProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const {
     attributes,
     listeners,
@@ -129,6 +130,13 @@ export function SortableBlock({
                     onChange={(value) => updateContent("ctaLink", value)}
                     placeholder="/page"
                     label="CTA Link"
+                  />
+                </div>
+                <div>
+                  <ButtonPresetSelector
+                    value={block.content.buttonPreset || null}
+                    onChange={(presetSlug) => updateContent("buttonPreset", presetSlug)}
+                    label="Button Style"
                   />
                 </div>
               </>

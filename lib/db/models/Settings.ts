@@ -21,6 +21,8 @@ export interface ISettings {
   showNavbar: boolean;
   navbarLogo?: string;
   navbarLogoText?: string;
+  buttonStyle: "rounded" | "square" | "pill";
+  activeButtonPreset?: string; // Slug of the active button preset
   createdAt: Date;
   updatedAt: Date;
 }
@@ -107,6 +109,15 @@ const SettingsSchema = new Schema<ISettings>(
       default: null,
     },
     navbarLogoText: {
+      type: String,
+      default: null,
+    },
+    buttonStyle: {
+      type: String,
+      enum: ["rounded", "square", "pill"],
+      default: "rounded",
+    },
+    activeButtonPreset: {
       type: String,
       default: null,
     },
