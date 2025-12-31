@@ -36,6 +36,10 @@ async function seed() {
       adminEmail: "admin@ojvwebdesign.com",
       fromEmail: "noreply@pawfectpoodles.com",
       replyToEmail: "admin@ojvwebdesign.com",
+      navbarStyle: "default",
+      navbarPosition: "top",
+      showNavbar: true,
+      navbarLogoText: "Pawfect Poodles",
     },
     { upsert: true, new: true }
   );

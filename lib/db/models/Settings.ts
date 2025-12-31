@@ -16,6 +16,11 @@ export interface ISettings {
   emailProvider: "resend" | "sendgrid" | "mailgun";
   emailApiKey?: string;
   storageProvider: "r2" | "s3" | "uploadthing";
+  navbarStyle: "default" | "centered" | "minimal" | "sticky";
+  navbarPosition: "top" | "bottom";
+  showNavbar: boolean;
+  navbarLogo?: string;
+  navbarLogoText?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -82,6 +87,28 @@ const SettingsSchema = new Schema<ISettings>(
       type: String,
       enum: ["r2", "s3", "uploadthing"],
       default: "r2",
+    },
+    navbarStyle: {
+      type: String,
+      enum: ["default", "centered", "minimal", "sticky"],
+      default: "default",
+    },
+    navbarPosition: {
+      type: String,
+      enum: ["top", "bottom"],
+      default: "top",
+    },
+    showNavbar: {
+      type: Boolean,
+      default: true,
+    },
+    navbarLogo: {
+      type: String,
+      default: null,
+    },
+    navbarLogoText: {
+      type: String,
+      default: null,
     },
   },
   {
