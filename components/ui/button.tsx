@@ -4,6 +4,7 @@ import * as React from "react"
 import { usePathname } from "next/navigation"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import { useCallback } from "react"
 
 import { cn } from "@/lib/utils"
 
@@ -53,7 +54,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       : pathname?.startsWith("/admin") ?? false
     
     // Get dynamic styles from CSS variables
-    const getButtonStyles = (): React.CSSProperties => {
+    const getButtonStyles = useCallback((): React.CSSProperties => {
       if (typeof window === "undefined" || shouldDisablePreset) {
         return {}; // Return empty styles during SSR or if preset is disabled
       }
@@ -141,7 +142,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }
       
       return styles;
-    };
+    }, [variant, size, shouldDisablePreset]);
     
     const [buttonStyles, setButtonStyles] = React.useState<React.CSSProperties>(() => getButtonStyles());
     
@@ -229,7 +230,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         observer.disconnect();
         styleObserver.disconnect();
       };
-    }, [variant, size, shouldDisablePreset]);
+    }, [variant, size, shouldDisablePreset, getButtonStyles]);
     
     // For admin buttons, don't apply preset styles at all
     const finalStyles = shouldDisablePreset ? {} : buttonStyles;
