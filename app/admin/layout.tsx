@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth/auth";
 import { Sidebar } from "@/components/admin/sidebar";
 import { Header } from "@/components/admin/header";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import type { ReactNode } from "react";
 
 export default async function AdminLayout({
@@ -9,6 +10,15 @@ export default async function AdminLayout({
 }: {
   children: ReactNode;
 }) {
+  // Check if we're on the login page via middleware header
+  const headersList = await headers();
+  const isLoginPage = headersList.get("x-is-login-page") === "true";
+
+  // Skip auth check for login page - let the login layout handle it
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
+
   try {
     // Check auth - middleware handles redirect, but we check here too
     const session = await auth();

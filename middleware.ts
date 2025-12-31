@@ -6,9 +6,11 @@ export async function middleware(req: NextRequest) {
   const isOnLogin = pathname === "/admin/login" || pathname.startsWith("/admin/login");
   const isOnAdmin = pathname.startsWith("/admin");
 
-  // Always allow login page
+  // Always allow login page - set a header so layout knows
   if (isOnLogin) {
-    return NextResponse.next();
+    const response = NextResponse.next();
+    response.headers.set("x-is-login-page", "true");
+    return response;
   }
 
   // Protect other admin routes
